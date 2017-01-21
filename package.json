@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "simple app that parses data recieved from serial port into commands for vlc http server",
   "scripts": {
+    "clean": "rm -rf build",
     "compile": "tsc --noUnusedParameters --noUnusedLocals",
     "lint": "tslint app.ts",
     "prestart": "npm run lint && npm run compile",
@@ -11,13 +12,20 @@
     "test": "NODE_ENV=test mocha build/test --recursive"
   },
   "dependencies": {
+    "@types/bluebird": "^3.0.35",
+    "@types/node": "7.0.0",
+    "@types/serialport": "4.0.6",
+    "bluebird": "^3.4.4",
+    "serialport": "4.0.7",
     "tslint": "^4.3.1",
     "typescript": "^2.1.5"
   },
   "devDependencies": {
     "@types/chai": "^3.4.34",
+    "@types/chai-as-promised": "^0.0.29",
     "@types/mocha": "^2.2.38",
     "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
     "mocha": "^3.2.0"
   },
   "author": "alec.rodic@gmail.com"
