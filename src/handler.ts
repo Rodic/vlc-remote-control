@@ -3,19 +3,26 @@
 import * as Promise from "bluebird";
 
 import commandMapper from "./command-mapper";
-import parsePortData from "./input-parser";
-import { UnknownCommandError } from "./errors";
+import parseSerialPortInput from "./input-parser";
+import get, { getVlcOptions } from "./http-client";
+import { UnknownCommandError, XmlParsingError } from "./errors";
 
 export default function(
-  port: number
+  port: number,
+  pass: string
 ): (serialPortData: Buffer) => Promise<void> {
   return serialPortInput => {
-    const rawCommand = parsePortData(serialPortInput);
+    const rawCommand = parseSerialPortInput(serialPortInput);
+    // TODO use proper logger
     return commandMapper(rawCommand, port)
-      .then(command => {
-        console.log("VlcUrl: ", command);
+      .then(uri => {
+        const options = getVlcOptions(uri, pass);
+        return get(options);
       })
       .catch(UnknownCommandError, err => {
+        console.log(err.message);
+      })
+      .catch(XmlParsingError, err => {
         console.log(err.message);
       });
   };
