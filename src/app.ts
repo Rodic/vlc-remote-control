@@ -5,6 +5,7 @@ import * as SerialPort from "serialport";
 import handler from "./handler";
 import argsParser from "./args-parser";
 import { logError } from "./logger";
+import { ArgsError } from "./errors";
 
 argsParser()
   .then(opts => {
@@ -15,4 +16,4 @@ argsParser()
     port.on("data", handler(opts.vlcPort, opts.password));
     port.on("error", logError);
   })
-  .catch(logError);
+  .catch(ArgsError, logError);

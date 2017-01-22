@@ -5,9 +5,8 @@ import * as Promise from "bluebird";
 import commandMapper from "./command-mapper";
 import parseSerialPortInput from "./input-parser";
 import get, { getVlcOptions } from "./http-client";
-import { UnknownCommandError, XmlParsingError } from "./errors";
-
 import { logError } from "./logger";
+import { UnknownCommandError, XmlParsingError } from "./errors";
 
 export default function(
   port: number,
