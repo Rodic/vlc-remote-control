@@ -3,18 +3,16 @@
 import * as SerialPort from "serialport";
 
 import handler from "./handler";
+import argsParser from "./args-parser";
 import { logError } from "./logger";
 
-// TODO read from command line
+argsParser()
+  .then(opts => {
+    const port = new SerialPort(opts.serialPort, {
+      baudRate: opts.baudRate
+    });
 
-const portPath: string = "/dev/pts/4";
-const baudRate: number = 9600;
-const vlcPort: number = 8080;
-const vlcPass: string = "test";
-
-const port = new SerialPort(portPath, {
-  baudRate: baudRate
-});
-
-port.on("data", handler(vlcPort, vlcPass));
-port.on("error", logError);
+    port.on("data", handler(opts.vlcPort, opts.password));
+    port.on("error", logError);
+  })
+  .catch(logError);

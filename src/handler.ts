@@ -12,7 +12,7 @@ import { logError } from "./logger";
 export default function(
   port: number,
   pass: string
-): (serialPortData: Buffer) => Promise<void> {
+): (serialPortInput: Buffer) => Promise<void> {
   return serialPortInput => {
     const rawCommand = parseSerialPortInput(serialPortInput);
     return commandMapper(rawCommand, port)
