@@ -6,6 +6,8 @@ import { RequestError, StatusCodeError } from "request-promise/errors";
 import { parseString } from "xml2js";
 import { XmlParsingError } from "./errors";
 
+import { logInfo, logError } from "./logger";
+
 type VlcState = "playing" | "stoped" | "paused";
 
 interface VlcResponse {
@@ -17,17 +19,10 @@ interface VlcResponse {
 export default function(
   options: rp.OptionsWithUrl
 ): Promise<void> {
-  // TODO use proper logger
   return rp(options)
-    .then(state => {
-      console.log(`VLC state: ${state}`);
-    })
-    .catch(RequestError, error => {
-      console.log(error.message);
-    })
-    .catch(StatusCodeError, error => {
-      console.log(error.message);
-    });
+    .then(state => logInfo(`VLC state: ${state}`))
+    .catch(RequestError, logError)
+    .catch(StatusCodeError, logError);
 }
 
 export function getVlcOptions(

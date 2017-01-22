@@ -19,6 +19,7 @@
     "@types/serialport": "4.0.6",
     "@types/xml2js": "0.0.32",
     "bluebird": "3.4.7",
+    "eazy-logger": "3.0.2",
     "request": "2.79.0",
     "request-promise": "4.1.1",
     "serialport": "4.0.7",

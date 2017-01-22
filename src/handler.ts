@@ -7,23 +7,20 @@ import parseSerialPortInput from "./input-parser";
 import get, { getVlcOptions } from "./http-client";
 import { UnknownCommandError, XmlParsingError } from "./errors";
 
+import { logError } from "./logger";
+
 export default function(
   port: number,
   pass: string
 ): (serialPortData: Buffer) => Promise<void> {
   return serialPortInput => {
     const rawCommand = parseSerialPortInput(serialPortInput);
-    // TODO use proper logger
     return commandMapper(rawCommand, port)
       .then(uri => {
         const options = getVlcOptions(uri, pass);
         return get(options);
       })
-      .catch(UnknownCommandError, err => {
-        console.log(err.message);
-      })
-      .catch(XmlParsingError, err => {
-        console.log(err.message);
-      });
+      .catch(UnknownCommandError, logError)
+      .catch(XmlParsingError, logError);
   };
 }

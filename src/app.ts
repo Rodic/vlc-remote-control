@@ -3,6 +3,7 @@
 import * as SerialPort from "serialport";
 
 import handler from "./handler";
+import { logError } from "./logger";
 
 // TODO read from command line
 
@@ -16,3 +17,4 @@ const port = new SerialPort(portPath, {
 });
 
 port.on("data", handler(vlcPort, vlcPass));
+port.on("error", logError);
