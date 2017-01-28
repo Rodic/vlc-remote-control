@@ -1,5 +1,7 @@
 # VLC Remote Control
 
+[![Build Status](https://travis-ci.org/Rodic/vlc-remote-control.svg?branch=master)](https://travis-ci.org/Rodic/vlc-remote-control)
+
 A simple app that reads data from a serial port and parse them into URL commands for the VLC HTTP server.
 
 In order to use it, you would first have to enable VLC's [web interface](https://wiki.videolan.org/documentation:modules/http_intf/) and set password. Password is mandatory.
