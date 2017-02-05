@@ -46,3 +46,7 @@ and from other terminal
 ```shell
 $ echo "3" > /dev/pts/2
 ```
+
+## Arduino
+
+Arduino [remote control](https://github.com/mushan12/arduino-remote-control)
