@@ -1,6 +1,6 @@
 # VLC Remote Control
 
-[![Build Status](https://travis-ci.org/Rodic/vlc-remote-control.svg?branch=master)](https://travis-ci.org/Rodic/vlc-remote-control)
+[![Build Status](https://travis-ci.org/rodic/vlc-remote-control.svg?branch=master)](https://travis-ci.org/rodic/vlc-remote-control)
 
 A simple app that reads data from a serial port and parse them into URL commands for the VLC HTTP server.
 
